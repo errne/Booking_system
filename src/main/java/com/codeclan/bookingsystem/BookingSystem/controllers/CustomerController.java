@@ -23,4 +23,11 @@ public class CustomerController  {
         return customerRepository.findCustomersByCourseId(courseId);
     }
 
+    @GetMapping(value = "course/{courseId}/customer/towns/{town}")
+    public List<Customer>getCustomerByCourseIdandTown(@PathVariable Long courseId, @PathVariable String town){
+        return customerRepository.findCustomerByCourseIdandTown(courseId, town);
+    }
+
+
+
 }
