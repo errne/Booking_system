@@ -36,7 +36,7 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom{
     }
 
     @Transactional
-    public List<Customer>findCustomerByCourseIdandTown(Long courseId, String town){
+    public List<Customer>findCustomersByCourseIdandTown(Long courseId, String town){
         List<Customer>results = null;
         Session session = entityManager.unwrap(Session.class);
         try {
@@ -52,6 +52,27 @@ public class CustomerRepositoryImpl implements CustomerRepositoryCustom{
         return results;
 
     }
+
+    @Transactional
+    public List<Customer>findCustomersByCourseIdAndTownAndOverAge(Long courseId, String town, int age){
+        List<Customer>results = null;
+        Session session = entityManager.unwrap(Session.class);
+        try {
+            Criteria cr = session.createCriteria(Customer.class);
+            cr.createAlias("bookings", "bookingAlias");
+            cr.add(Restrictions.eq("bookingAlias.course.id", courseId));
+            cr.add(Restrictions.eq("town", town));
+            cr.add(Restrictions.gt("age", age));
+            results = cr.list();
+        }
+        catch (HibernateException ex){
+            ex.printStackTrace();
+        }
+        return results;
+
+    }
+
+
 
 
 

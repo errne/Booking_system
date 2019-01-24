@@ -7,6 +7,8 @@ import java.util.List;
 public interface CustomerRepositoryCustom {
 
     List<Customer> findCustomersByCourseId(Long courseId);
-    List<Customer> findCustomerByCourseIdandTown( Long courseId, String town);
+    List<Customer> findCustomersByCourseIdandTown( Long courseId, String town);
+
+    List<Customer> findCustomersByCourseIdAndTownAndOverAge( Long courseId, String town, int age);
 
 }
